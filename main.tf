@@ -14,7 +14,7 @@ provider "aws" {
 
 # Create an S3 bucket to store transformed data
 resource "aws_s3_bucket" "firehose_bucket" {
-  bucket = "firehose-transformed-data"
+  bucket = "transformed-data-mu"
 }
 
 # Configure Server-Side Encryption using the new resource

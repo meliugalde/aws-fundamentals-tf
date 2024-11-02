@@ -1,6 +1,6 @@
 #Create SQS Queue
 resource "aws_sqs_queue" "tech_learning_queue" {
-  name = "tech_learning_queue"
+  name = "mu-tech-learning-queue"
 }
 
 #Subscribe SQS to SNS Topic

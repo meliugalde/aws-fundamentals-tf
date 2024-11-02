@@ -1,21 +1,23 @@
 # Kinesis Data Stream
 resource "aws_kinesis_stream" "tech-learning_stream" {
-  name        = "tech-learning-stream"
+  name        = "mu-tech-learning-stream"
   shard_count = 1
 
 }
 
 # Kinesis Firehose Delivery Stream
 resource "aws_kinesis_firehose_delivery_stream" "firehose_stream" {
-  name        = "tech-learning-firehose"
+  name        = "mu-tech-learning-firehose"
   destination = "extended_s3"
 
   extended_s3_configuration {
     role_arn   = aws_iam_role.firehose_role.arn
     bucket_arn = aws_s3_bucket.firehose_bucket.arn
-    buffering_interval  = 300      # Buffer time in seconds
+    buffering_interval  = 60      # Buffer time in seconds
     buffering_size      = 5        # Buffer size in MB
-    compression_format  = "GZIP"   # Compression format for S3 storage
+    compression_format = "UNCOMPRESSED"  # Change this to GZIP, Snappy, or other formats as needed
+
+    //compression_format  = "GZIP"   # Compression format for S3 storage
 
      # Lambda Transformation
     processing_configuration {

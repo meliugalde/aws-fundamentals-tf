@@ -1,6 +1,6 @@
 #Create Lambda function
 resource "aws_lambda_function" "tech_learning_lambda" {
-  function_name = "tech_learning_lambda"
+  function_name = "mu-tech-learning-lambda"
   role = "${aws_iam_role.lambda_role.arn}"
   runtime = "dotnet8"
   filename = "MyLambdaSQS/myLambdaSQS/src/myLambdaSQS/lambda_function.zip"
@@ -18,7 +18,7 @@ resource "aws_lambda_function" "tech_learning_lambda" {
 
 #Create IAM Role for Lambda to allow CloudWatch and DynamoDB access
 resource "aws_iam_role" "lambda_role" {
-  name = "tech_learning_lambda_role"
+  name = "mu-tech-learning-lambda_role"
   assume_role_policy = jsonencode({
     "Version" = "2012-10-17"
     "Statement" = [
@@ -128,13 +128,13 @@ resource "aws_iam_role_policy_attachment" "cloudwatch_logs_attach" {
 
 #Create CloudWatch Log Group
 resource "aws_cloudwatch_log_group" "lambda_log_group" {
-  name = "lambda/tech_learning-lambda"
+  name = "lambda/tech-learning-lambda"
   retention_in_days = 14
 }
 
 # Lambda Function for Kinesis Firehose transformation
 resource "aws_lambda_function" "firehose_transformation_lambda" {
-  function_name = "transformation_lambda"
+  function_name = "mu-transformation-lambda"
   role          = aws_iam_role.lambda_exec_role.arn
   handler       = "transformation_lambda.handler"
   runtime       = "nodejs16.x"
@@ -150,7 +150,7 @@ resource "aws_lambda_function" "firehose_transformation_lambda" {
 
 # Lambda Execution Role for Firehose Transformer
 resource "aws_iam_role" "lambda_exec_role" {
-  name = "lambda_exec_role"
+  name = "mu_lambda_exec_role"
 
   assume_role_policy = jsonencode({
     "Version": "2012-10-17",
@@ -167,7 +167,7 @@ resource "aws_iam_role" "lambda_exec_role" {
   })
 }
 
-# Attach Permissions to the Role
+# Attach Permissions to the Role  VALID
 resource "aws_iam_policy_attachment" "lambda_policy_attachment" {
   name       = "lambda_basic_execution_policy"
   roles      = [aws_iam_role.lambda_exec_role.name]

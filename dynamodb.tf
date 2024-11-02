@@ -1,6 +1,6 @@
 #Create DynamoDb table
 resource "aws_dynamodb_table" "tech_learning_table" {
-  name = "tech_learning"
+  name = "mu-tech-learning"
   hash_key = "id"
   billing_mode   = "PROVISIONED"
   read_capacity = 1
@@ -32,7 +32,7 @@ resource "aws_iam_policy" "dynamodb_policy" {
         "dynamodb:PutItem",
         "dynamodb:UpdateItem"
       ],
-      "Resource": "arn:aws:dynamodb:*:*:table/tech_learning",
+      "Resource": "arn:aws:dynamodb:*:*:table/mu-tech-learning",
       "Effect": "Allow"
     }
   ]
